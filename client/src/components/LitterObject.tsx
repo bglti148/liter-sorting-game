@@ -9,7 +9,7 @@ interface LitterObjectProps {
 }
 
 export function LitterObject({ item }: LitterObjectProps) {
-  const meshRef = useRef<THREE.Mesh>(null);
+  const groupRef = useRef<THREE.Group>(null);
   const [hovered, setHovered] = useState(false);
   const selectItem = useRecyclingGame((state) => state.selectItem);
   const selectedItemId = useRecyclingGame((state) => state.selectedItemId);
@@ -22,39 +22,42 @@ export function LitterObject({ item }: LitterObjectProps) {
   };
 
   useFrame((state) => {
-    if (meshRef.current) {
+    if (groupRef.current) {
       if (isSelected) {
-        meshRef.current.position.y = item.position[1] + Math.sin(state.clock.elapsedTime * 5) * 0.1;
-        meshRef.current.rotation.y = state.clock.elapsedTime * 2;
+        groupRef.current.position.y = item.position[1] + Math.sin(state.clock.elapsedTime * 5) * 0.15;
+        groupRef.current.rotation.y = state.clock.elapsedTime * 2;
+        groupRef.current.scale.setScalar(1.3 + Math.sin(state.clock.elapsedTime * 3) * 0.1);
       } else {
-        meshRef.current.position.y = item.position[1] + Math.sin(state.clock.elapsedTime * 2 + item.position[0]) * 0.05;
+        groupRef.current.position.y = item.position[1] + Math.sin(state.clock.elapsedTime * 2 + item.position[0]) * 0.05;
+        groupRef.current.rotation.y = 0;
+        groupRef.current.scale.setScalar(hovered ? 1.2 : 1);
       }
     }
   });
 
   return (
-    <group position={item.position}>
+    <group ref={groupRef} position={item.position}>
       <mesh
-        ref={meshRef}
         onClick={handleClick}
         onPointerOver={() => setHovered(true)}
         onPointerOut={() => setHovered(false)}
-        castShadow
       >
-        <boxGeometry args={[0.6, 0.6, 0.6]} />
-        <meshStandardMaterial 
+        <planeGeometry args={[0.8, 0.8]} />
+        <meshBasicMaterial 
           color={isSelected ? "#FFD700" : (hovered ? "#FFF59D" : "#FFFFFF")}
-          emissive={isSelected ? "#FFD700" : "#000000"}
-          emissiveIntensity={isSelected ? 0.5 : 0}
+          transparent
+          opacity={0.9}
         />
       </mesh>
       
       <Text
-        position={[0, 0, 0.31]}
-        fontSize={0.4}
-        color="black"
+        position={[0, 0, 0.01]}
+        fontSize={0.5}
         anchorX="center"
         anchorY="middle"
+        onClick={handleClick}
+        onPointerOver={() => setHovered(true)}
+        onPointerOut={() => setHovered(false)}
       >
         {item.icon}
       </Text>
@@ -62,11 +65,11 @@ export function LitterObject({ item }: LitterObjectProps) {
       {(hovered || isSelected) && (
         <Text
           position={[0, 0.6, 0]}
-          fontSize={0.15}
+          fontSize={0.18}
           color="white"
           anchorX="center"
           anchorY="middle"
-          outlineWidth={0.02}
+          outlineWidth={0.03}
           outlineColor="black"
         >
           {item.name}
