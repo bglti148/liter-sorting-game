@@ -24,11 +24,11 @@ export function LitterObject({ item }: LitterObjectProps) {
   useFrame((state) => {
     if (groupRef.current) {
       if (isSelected) {
-        groupRef.current.position.y = item.position[1] + Math.sin(state.clock.elapsedTime * 5) * 0.15;
-        groupRef.current.scale.setScalar(1.3 + Math.sin(state.clock.elapsedTime * 3) * 0.1);
+        groupRef.current.position.y = item.position[1] + Math.sin(state.clock.elapsedTime * 3) * 0.05;
+        groupRef.current.scale.setScalar(1.15);
       } else {
-        groupRef.current.position.y = item.position[1] + Math.sin(state.clock.elapsedTime * 2 + item.position[0]) * 0.05;
-        groupRef.current.scale.setScalar(hovered ? 1.2 : 1);
+        groupRef.current.position.y = item.position[1] + Math.sin(state.clock.elapsedTime * 2 + item.position[0]) * 0.03;
+        groupRef.current.scale.setScalar(hovered ? 1.1 : 1);
       }
     }
   });
