@@ -33,31 +33,31 @@ export function GameHUD() {
   return (
     <div className="fixed inset-0 pointer-events-none">
       <div className="flex flex-col items-center justify-between h-full p-4">
-        <div className="w-full max-w-4xl flex justify-between items-start pointer-events-auto">
-          <div className="bg-white/90 backdrop-blur rounded-lg shadow-lg px-6 py-3">
-            <div className="text-sm text-gray-600">Score</div>
-            <div className="text-4xl font-bold text-green-700">{score}</div>
-            {feedback && (
-              <div 
-                className="text-2xl font-bold absolute -top-8 left-1/2 -translate-x-1/2 animate-pulse"
-                style={{ color: feedback.color }}
-              >
-                {feedback.message}
+        <div className="w-full max-w-4xl flex flex-col items-center gap-4">
+          <div className="w-full flex justify-between items-start pointer-events-auto">
+            <div className="bg-white/90 backdrop-blur rounded-lg shadow-lg px-6 py-3 relative">
+              <div className="text-sm text-gray-600">Score</div>
+              <div className="text-4xl font-bold text-green-700">{score}</div>
+              {feedback && (
+                <div 
+                  className="text-2xl font-bold absolute -top-8 left-1/2 -translate-x-1/2 animate-pulse"
+                  style={{ color: feedback.color }}
+                >
+                  {feedback.message}
+                </div>
+              )}
+            </div>
+            
+            <div className="bg-white/90 backdrop-blur rounded-lg shadow-lg px-6 py-3">
+              <div className="text-sm text-gray-600">Time</div>
+              <div className={`text-4xl font-bold ${timeRemaining < 10 ? 'text-red-600 animate-pulse' : 'text-blue-700'}`}>
+                {Math.ceil(timeRemaining)}s
               </div>
-            )}
-          </div>
-          
-          <div className="bg-white/90 backdrop-blur rounded-lg shadow-lg px-6 py-3">
-            <div className="text-sm text-gray-600">Time</div>
-            <div className={`text-4xl font-bold ${timeRemaining < 10 ? 'text-red-600 animate-pulse' : 'text-blue-700'}`}>
-              {Math.ceil(timeRemaining)}s
             </div>
           </div>
-        </div>
-        
-        <div className="flex flex-col items-center gap-2">
+          
           {selectedItem && (
-            <div className="bg-yellow-100/95 backdrop-blur border-2 border-yellow-400 rounded-lg shadow-lg px-6 py-3 animate-bounce">
+            <div className="bg-yellow-100/95 backdrop-blur border-2 border-yellow-400 rounded-lg shadow-lg px-6 py-3 pointer-events-auto">
               <div className="text-center">
                 <div className="text-3xl mb-1">{selectedItem.icon}</div>
                 <div className="text-lg font-bold text-gray-800">{selectedItem.name}</div>
@@ -65,7 +65,9 @@ export function GameHUD() {
               </div>
             </div>
           )}
-          
+        </div>
+        
+        <div className="flex flex-col items-center gap-2">
           <div className="bg-white/90 backdrop-blur rounded-lg shadow-lg px-6 py-3">
             <div className="flex items-center gap-3">
               <div className="text-sm text-gray-600">Park Health:</div>

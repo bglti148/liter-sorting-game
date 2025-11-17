@@ -25,11 +25,9 @@ export function LitterObject({ item }: LitterObjectProps) {
     if (groupRef.current) {
       if (isSelected) {
         groupRef.current.position.y = item.position[1] + Math.sin(state.clock.elapsedTime * 5) * 0.15;
-        groupRef.current.rotation.y = state.clock.elapsedTime * 2;
         groupRef.current.scale.setScalar(1.3 + Math.sin(state.clock.elapsedTime * 3) * 0.1);
       } else {
         groupRef.current.position.y = item.position[1] + Math.sin(state.clock.elapsedTime * 2 + item.position[0]) * 0.05;
-        groupRef.current.rotation.y = 0;
         groupRef.current.scale.setScalar(hovered ? 1.2 : 1);
       }
     }
