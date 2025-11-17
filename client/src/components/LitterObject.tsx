@@ -37,22 +37,9 @@ export function LitterObject({ item }: LitterObjectProps) {
 
   return (
     <group ref={groupRef} position={item.position}>
-      <mesh
-        onClick={handleClick}
-        onPointerOver={() => setHovered(true)}
-        onPointerOut={() => setHovered(false)}
-      >
-        <planeGeometry args={[0.8, 0.8]} />
-        <meshBasicMaterial 
-          color={isSelected ? "#FFD700" : (hovered ? "#FFF59D" : "#FFFFFF")}
-          transparent
-          opacity={0.9}
-        />
-      </mesh>
-      
       <Text
-        position={[0, 0, 0.01]}
-        fontSize={0.5}
+        position={[0, 0, 0]}
+        fontSize={0.6}
         anchorX="center"
         anchorY="middle"
         onClick={handleClick}
@@ -60,16 +47,21 @@ export function LitterObject({ item }: LitterObjectProps) {
         onPointerOut={() => setHovered(false)}
       >
         {item.icon}
+        <meshBasicMaterial 
+          color={isSelected ? "#FFD700" : (hovered ? "#FFEB3B" : "#FFFFFF")}
+          transparent
+          opacity={0.9}
+        />
       </Text>
       
       {(hovered || isSelected) && (
         <Text
-          position={[0, 0.6, 0]}
-          fontSize={0.18}
+          position={[0, 0.65, 0]}
+          fontSize={0.2}
           color="white"
           anchorX="center"
           anchorY="middle"
-          outlineWidth={0.03}
+          outlineWidth={0.04}
           outlineColor="black"
         >
           {item.name}
