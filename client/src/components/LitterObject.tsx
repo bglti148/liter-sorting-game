@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { useFrame, ThreeEvent } from "@react-three/fiber";
-import { Text } from "@react-three/drei";
+import { Text, Html } from "@react-three/drei";
 import * as THREE from "three";
 import { useRecyclingGame, type LitterItem } from "@/lib/stores/useRecyclingGame";
 
@@ -47,17 +47,22 @@ export function LitterObject({ item }: LitterObjectProps) {
           opacity={0.8}
         />
       </mesh>
-      <Text
+      <Html
+        center
         position={[0, 0, 0.01]}
-        fontSize={0.6}
-        anchorX="center"
-        anchorY="middle"
-        onClick={handleClick}
-        onPointerOver={() => setHovered(true)}
-        onPointerOut={() => setHovered(false)}
+        style={{
+          pointerEvents: 'none',
+          userSelect: 'none',
+        }}
       >
-        {item.icon}
-      </Text>
+        <div style={{
+          fontSize: '48px',
+          lineHeight: '48px',
+          textAlign: 'center',
+        }}>
+          {item.icon}
+        </div>
+      </Html>
       
       {(hovered || isSelected) && (
         <Text
