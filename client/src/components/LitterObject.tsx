@@ -54,12 +54,12 @@ export function LitterObject({ item }: LitterObjectProps) {
       
       {(hovered || isSelected) && (
         <Text
-          position={[0, 0.65, 0]}
-          fontSize={0.2}
+          position={[0, -0.5, 0]}
+          fontSize={0.15}
           color="white"
           anchorX="center"
           anchorY="middle"
-          outlineWidth={0.04}
+          outlineWidth={0.03}
           outlineColor="black"
         >
           {item.name}

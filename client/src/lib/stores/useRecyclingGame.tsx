@@ -38,21 +38,21 @@ interface RecyclingGameState {
 }
 
 const litterDatabase: Array<{name: string, correctBin: BinType, icon: string, fact: string}> = [
-  { name: "Plastic Bottle", correctBin: "recycling", icon: "🍾", fact: "Plastic bottles can be recycled into new bottles, clothing, and carpets!" },
+  { name: "Plastic Bottle", correctBin: "recycling", icon: "🧴", fact: "Plastic bottles can be recycled into new bottles, clothing, and carpets!" },
   { name: "Aluminum Can", correctBin: "recycling", icon: "🥫", fact: "Aluminum cans can be recycled indefinitely without losing quality!" },
   { name: "Cardboard Box", correctBin: "recycling", icon: "📦", fact: "Recycled cardboard saves trees and uses 75% less energy to produce!" },
-  { name: "Glass Bottle", correctBin: "recycling", icon: "🍷", fact: "Glass can be recycled endlessly without quality loss!" },
+  { name: "Glass Bottle", correctBin: "recycling", icon: "🍾", fact: "Glass can be recycled endlessly without quality loss!" },
   { name: "Newspaper", correctBin: "recycling", icon: "📰", fact: "Recycling one ton of paper saves 17 trees!" },
-  { name: "Apple Core", correctBin: "compost", icon: "🍎", fact: "Apple cores decompose in 2 months and create nutrient-rich soil!" },
-  { name: "Banana Peel", correctBin: "compost", icon: "🍌", fact: "Banana peels add potassium to compost, great for plants!" },
-  { name: "Coffee Grounds", correctBin: "compost", icon: "☕", fact: "Coffee grounds are nitrogen-rich and perfect for composting!" },
-  { name: "Eggshells", correctBin: "compost", icon: "🥚", fact: "Eggshells add calcium to compost and help plant growth!" },
-  { name: "Orange Peel", correctBin: "compost", icon: "🍊", fact: "Orange peels break down in compost and add nutrients to soil!" },
-  { name: "Plastic Bag", correctBin: "trash", icon: "👜", fact: "Most plastic bags can't be recycled at home - bring them to special drop-offs!" },
+  { name: "Apple", correctBin: "compost", icon: "🍎", fact: "Apple cores decompose in 2 months and create nutrient-rich soil!" },
+  { name: "Banana", correctBin: "compost", icon: "🍌", fact: "Banana peels add potassium to compost, great for plants!" },
+  { name: "Coffee Cup", correctBin: "compost", icon: "☕", fact: "Coffee grounds are nitrogen-rich and perfect for composting!" },
+  { name: "Egg", correctBin: "compost", icon: "🥚", fact: "Eggshells add calcium to compost and help plant growth!" },
+  { name: "Orange", correctBin: "compost", icon: "🍊", fact: "Orange peels break down in compost and add nutrients to soil!" },
+  { name: "Plastic Bag", correctBin: "trash", icon: "🛍️", fact: "Most plastic bags can't be recycled at home - bring them to special drop-offs!" },
   { name: "Styrofoam Cup", correctBin: "trash", icon: "🥤", fact: "Styrofoam takes 500 years to decompose and is rarely recyclable!" },
-  { name: "Chip Bag", correctBin: "trash", icon: "🍿", fact: "Chip bags are mixed materials and usually can't be recycled!" },
-  { name: "Candy Wrapper", correctBin: "trash", icon: "🍬", fact: "Most candy wrappers are too small and contaminated to recycle!" },
-  { name: "Used Napkin", correctBin: "trash", icon: "🧻", fact: "Used paper products can't be recycled due to contamination!" },
+  { name: "Candy", correctBin: "trash", icon: "🍬", fact: "Most candy wrappers are too small and contaminated to recycle!" },
+  { name: "Tissue", correctBin: "trash", icon: "🧻", fact: "Used paper products can't be recycled due to contamination!" },
+  { name: "Straw", correctBin: "trash", icon: "🥤", fact: "Plastic straws are too small to recycle and often end up in oceans!" },
 ];
 
 export const useRecyclingGame = create<RecyclingGameState>()(
