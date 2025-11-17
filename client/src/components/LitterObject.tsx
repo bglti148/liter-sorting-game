@@ -40,11 +40,10 @@ export function LitterObject({ item }: LitterObjectProps) {
         onPointerOver={() => setHovered(true)}
         onPointerOut={() => setHovered(false)}
       >
-        <circleGeometry args={[0.5, 32]} />
+        <planeGeometry args={[1, 1]} />
         <meshBasicMaterial 
-          color={isSelected ? "#FFD700" : (hovered ? "#FFEB3B" : "#FFFFFF")}
           transparent
-          opacity={0.8}
+          opacity={0}
         />
       </mesh>
       <Html
@@ -59,6 +58,7 @@ export function LitterObject({ item }: LitterObjectProps) {
           fontSize: '48px',
           lineHeight: '48px',
           textAlign: 'center',
+          filter: isSelected ? 'drop-shadow(0 0 8px gold)' : hovered ? 'drop-shadow(0 0 4px yellow)' : 'none',
         }}>
           {item.icon}
         </div>
