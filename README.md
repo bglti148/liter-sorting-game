@@ -2,9 +2,9 @@
 
 ## Overview
 
-Eco Sorter is an educational 3D browser game that teaches players about waste sorting and recycling. Built with React, Three.js, and Express, the game challenges users to sort litter items into the correct bins (recycling, compost, or trash) within a time limit. Players earn points for correct sorting and learn environmental facts about recycling and composting.
+Eco Sorter is an educational 2D browser game that teaches players about waste sorting and recycling. Built with React, TypeScript, and Express, the game challenges users to sort litter items into the correct bins (recycling, compost, or trash) within a time limit. Players earn points for correct sorting and learn environmental facts about recycling and composting.
 
-The application uses a modern full-stack architecture with a React frontend featuring 3D graphics, state management through Zustand, and a minimal Express backend prepared for future database integration.
+The application uses a modern full-stack architecture with a React frontend featuring a clean 2D interface with HTML/CSS positioning, emoji icons for litter items, custom bin images, and a park background. Game state is managed through Zustand, with a minimal Express backend prepared for future database integration.
 
 ## User Preferences
 
@@ -19,11 +19,12 @@ Preferred communication style: Simple, everyday language.
 - Vite as the build tool and development server for fast HMR and optimized builds
 - TailwindCSS for utility-first styling with a custom design system
 
-**3D Graphics Engine**
-- React Three Fiber (@react-three/fiber) provides React bindings for Three.js
-- React Three Drei (@react-three/drei) adds useful helpers and abstractions for 3D scenes
-- React Three Postprocessing for visual effects
-- GLSL shader support via vite-plugin-glsl for custom graphics
+**2D Graphics Implementation**
+- Pure HTML/CSS/DOM-based rendering (converted from 3D to 2D)
+- Litter items rendered as emoji icons in positioned button elements
+- Custom bin images (recycling, compost, trash) with hover effects
+- Park background image with green overlay feedback system
+- CSS positioning for item distribution across the playable area
 
 **State Management**
 - Zustand with subscribeWithSelector middleware manages all application state
@@ -34,12 +35,11 @@ Preferred communication style: Simple, everyday language.
 
 **Component Architecture**
 - Game components organized by feature:
-  - `RecyclingGame`: Main game container managing phase transitions
-  - `GameScene`: 3D scene setup with Three.js canvas
-  - `GameHUD`: 2D overlay showing score, timer, and feedback
-  - `LitterObject`: Individual 3D litter items with interaction
-  - `Bins`: Three recycling bins with click detection
-  - `ParkBackground`: Environmental scenery
+  - `RecyclingGame`: Main game container managing phase transitions and game loop
+  - `GameBoard2D`: 2D game board with park background image and green overlay
+  - `GameHUD`: UI overlay showing score, timer, park health meter, and feedback
+  - `LitterObject2D`: Individual litter items as clickable emoji buttons with CSS positioning
+  - `Bins2D`: Three bin images (recycling, compost, trash) with click detection and hover effects
   - `StartScreen` / `EndScreen`: Game flow UI
   - `SoundManager`: Audio initialization and control
 
@@ -99,9 +99,10 @@ Preferred communication style: Simple, everyday language.
 
 **Asset Dependencies**
 - Font loading via @fontsource/inter for consistent typography
-- Audio files (background music, sound effects) served as static assets
-- 3D model support for GLTF/GLB formats (configured but not currently used)
-- Texture files for park background rendering
+- Audio files (background music, sound effects) served as static assets via Howler.js
+- Custom bin images (recycling-bin.png, compost-bin.png, trash-bin.png) in /public/bins
+- Park background image with green overlay for environmental feedback
+- Emoji icons for litter items (bottles, cans, food waste, etc.)
 
 **Build and Development Tools**
 - TypeScript for static type checking across full stack
