@@ -1,6 +1,4 @@
-import { Canvas } from "@react-three/fiber";
-import { Suspense } from "react";
-import { GameScene } from "./GameScene";
+import { GameBoard2D } from "./GameBoard2D";
 import { GameHUD } from "./GameHUD";
 import { StartScreen } from "./StartScreen";
 import { EndScreen } from "./EndScreen";
@@ -15,21 +13,7 @@ export function RecyclingGame() {
       
       {phase === 'playing' && (
         <>
-          <Canvas
-            camera={{
-              position: [0, 2, 8],
-              fov: 50,
-              near: 0.1,
-              far: 1000
-            }}
-            gl={{
-              antialias: true,
-            }}
-          >
-            <Suspense fallback={null}>
-              <GameScene />
-            </Suspense>
-          </Canvas>
+          <GameBoard2D />
           <GameHUD />
         </>
       )}
