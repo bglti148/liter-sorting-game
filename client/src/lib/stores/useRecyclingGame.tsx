@@ -166,19 +166,19 @@ export const useRecyclingGame = create<RecyclingGameState>()(
       const randomLitter = litterDatabase[Math.floor(Math.random() * litterDatabase.length)];
       
       let randomX = 0;
-      let randomY = 0;
+      let randomZ = 0;
       let attempts = 0;
       let validPosition = false;
-      const minDistance = 1.5;
+      const minDistance = 2;
       
       while (!validPosition && attempts < 20) {
-        randomX = (Math.random() - 0.5) * 6;
-        randomY = Math.random() * 2 + 1;
+        randomX = (Math.random() - 0.5) * 12;
+        randomZ = (Math.random() - 0.5) * 6;
         
         validPosition = litterItems.every(item => {
           const dx = item.position[0] - randomX;
-          const dy = item.position[1] - randomY;
-          const distance = Math.sqrt(dx * dx + dy * dy);
+          const dz = item.position[2] - randomZ;
+          const distance = Math.sqrt(dx * dx + dz * dz);
           return distance >= minDistance;
         });
         
@@ -189,7 +189,7 @@ export const useRecyclingGame = create<RecyclingGameState>()(
         id: `litter-${Date.now()}-${Math.random()}`,
         name: randomLitter.name,
         correctBin: randomLitter.correctBin,
-        position: [randomX, randomY, 0],
+        position: [randomX, 1, randomZ],
         spawnTime: Date.now(),
         icon: randomLitter.icon,
         fact: randomLitter.fact,

@@ -16,8 +16,8 @@ export function LitterObject2D({ item }: LitterObject2DProps) {
     selectItem(item.id);
   };
 
-  const leftPercent = ((item.position[0] + 8) / 16) * 100;
-  const topPercent = (1 - (item.position[1] / 4)) * 60;
+  const leftPercent = ((item.position[0] + 6) / 12) * 100;
+  const topPercent = 10 + ((item.position[2] + 3) / 6) * 60;
 
   return (
     <button
