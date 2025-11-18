@@ -4,12 +4,10 @@ import { useAudio } from "@/lib/stores/useAudio";
 
 interface BinProps {
   type: BinType;
-  color: string;
-  label: string;
-  icon: string;
+  imageSrc: string;
 }
 
-function Bin2D({ type, color, label, icon }: BinProps) {
+function Bin2D({ type, imageSrc }: BinProps) {
   const [hovered, setHovered] = useState(false);
   const sortItem = useRecyclingGame((state) => state.sortItem);
   const getSelectedItem = useRecyclingGame((state) => state.getSelectedItem);
@@ -37,17 +35,18 @@ function Bin2D({ type, color, label, icon }: BinProps) {
       onClick={handleClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="flex-1 max-w-xs transition-all duration-200"
+      className="flex-1 max-w-xs transition-all duration-200 bg-transparent border-none cursor-pointer"
       style={{
-        backgroundColor: color,
-        transform: `scale(${hovered && selectedItemId ? 1.05 : 1})`,
-        boxShadow: hovered && selectedItemId ? `0 0 20px ${color}` : 'none',
+        transform: `scale(${hovered && selectedItemId ? 1.1 : 1})`,
+        filter: hovered && selectedItemId ? 'brightness(1.2) drop-shadow(0 0 20px rgba(255,255,255,0.5))' : 'none',
       }}
     >
-      <div className="h-48 flex flex-col items-center justify-center gap-2 text-white">
-        <div className="text-5xl">{icon}</div>
-        <div className="text-xl font-bold">{label}</div>
-      </div>
+      <img 
+        src={imageSrc} 
+        alt={`${type} bin`}
+        className="w-full h-auto object-contain"
+        style={{ maxHeight: '300px' }}
+      />
     </button>
   );
 }
@@ -77,10 +76,10 @@ export function Bins2D() {
           </div>
         </div>
       )}
-      <div className="flex gap-4 p-4 justify-center pointer-events-auto">
-        <Bin2D type="recycling" color="#2196F3" label="Recycle" icon="♻️" />
-        <Bin2D type="compost" color="#4CAF50" label="Compost" icon="🌱" />
-        <Bin2D type="trash" color="#757575" label="Trash" icon="🗑️" />
+      <div className="flex gap-4 p-4 justify-center pointer-events-auto items-end">
+        <Bin2D type="recycling" imageSrc="/bins/recycling-bin.png" />
+        <Bin2D type="compost" imageSrc="/bins/compost-bin.png" />
+        <Bin2D type="trash" imageSrc="/bins/trash-bin.png" />
       </div>
     </div>
   );
