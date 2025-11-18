@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRecyclingGame, type BinType } from "@/lib/stores/useRecyclingGame";
 import { useAudio } from "@/lib/stores/useAudio";
 
@@ -53,11 +53,35 @@ function Bin2D({ type, color, label, icon }: BinProps) {
 }
 
 export function Bins2D() {
+  const selectedItemId = useRecyclingGame((state) => state.selectedItemId);
+  const [showHint, setShowHint] = useState(false);
+
+  useEffect(() => {
+    if (selectedItemId) {
+      setShowHint(true);
+      const timer = setTimeout(() => {
+        setShowHint(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    } else {
+      setShowHint(false);
+    }
+  }, [selectedItemId]);
+
   return (
-    <div className="absolute bottom-0 left-0 right-0 flex gap-4 p-4 justify-center">
-      <Bin2D type="recycling" color="#2196F3" label="Recycle" icon="♻️" />
-      <Bin2D type="compost" color="#4CAF50" label="Compost" icon="🌱" />
-      <Bin2D type="trash" color="#757575" label="Trash" icon="🗑️" />
+    <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
+      {showHint && selectedItemId && (
+        <div className="flex justify-center mb-2 animate-pulse pointer-events-none">
+          <div className="bg-yellow-400/95 backdrop-blur border-2 border-yellow-600 rounded-lg shadow-lg px-6 py-2">
+            <div className="text-lg font-bold text-gray-900">👇 Click the right bin!</div>
+          </div>
+        </div>
+      )}
+      <div className="flex gap-4 p-4 justify-center pointer-events-auto">
+        <Bin2D type="recycling" color="#2196F3" label="Recycle" icon="♻️" />
+        <Bin2D type="compost" color="#4CAF50" label="Compost" icon="🌱" />
+        <Bin2D type="trash" color="#757575" label="Trash" icon="🗑️" />
+      </div>
     </div>
   );
 }
